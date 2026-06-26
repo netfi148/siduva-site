@@ -1,76 +1,697 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siduva - Virtual Assistant Services</title>
-    
-    <meta name="description" content="Grow your business while we handle the daily tasks. Hire a dedicated virtual assistant from Siduva today.">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            navy: '#0f172a',     // Darker slate/navy
-                            blue: '#1e3a8a',    // Primary Siduva Blue
-                            lightBlue: '#3b82f6', // Accent blue
-                            accent: '#f59e0b',  // Amber/Gold for primary CTA
-                            gray: '#f8fafc',    // Very light background
-                            darkGray: '#334155' // Standard text color
-                        }
-                    },
-                    boxShadow: {
-                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-                        'hover': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
-                    }
-                }
-            }
-        }
-    </script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Siduva – Virtual Assistant Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 
-    <style>
-        /* Hero Background with an overlay to ensure text readability */
-        .hero-bg {
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0.2) 100%), 
-                url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Parallax effect */
-        }
-        
-        /* Smooth transitions for interactive elements */
-        .card-transition {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .card-transition:hover {
-            transform: translateY(-8px);
-        }
+<style>
+  :root {
+    --navy: #0D2B6E;
+    --navy-mid: #1A3E8F;
+    --blue: #2563EB;
+    --accent: #3B82F6;
+    --gold: #60A5FA;
+    --light: #EFF6FF;
+    --white: #FFFFFF;
+    --gray: #64748B;
+    --text: #1E293B;
+    --border: #BFDBFE;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
 
-        /* Scroll Reveal Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .delay-100 { transition-delay: 100ms
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 68px;
+    box-shadow: 0 2px 20px rgba(0,0,0,.35);
+  }
+  .nav-logo {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.6rem; font-weight: 800; letter-spacing: normal;
+    color: var(--white); text-decoration: none;
+    display: flex; align-items: center; gap: 0;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 8px; align-items: center; }
+  .nav-links a {
+    color: rgba(255,255,255,.8); text-decoration: none;
+    font-size: .875rem; font-weight: 500; padding: 6px 14px; border-radius: 6px;
+    transition: background .2s, color .2s;
+  }
+  .nav-links a:hover { background: rgba(255,255,255,.1); color: var(--white); }
+  .btn-apply {
+    background: var(--accent) !important; color: var(--white) !important;
+    font-weight: 700 !important; border-radius: 8px !important;
+    padding: 8px 20px !important;
+  }
+  .btn-apply:hover { background: var(--blue) !important; }
+  .btn-need {
+    border: 1.5px solid rgba(255,255,255,.4) !important; color: var(--white) !important;
+    border-radius: 8px !important;
+  }
+  .nav-links a.nav-active { background: rgba(255,255,255,.15); color: var(--white) !important; }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: .3s; }
+  .mobile-menu {
+    display: none; position: fixed; top: 68px; left: 0; right: 0; z-index: 99;
+    background: var(--navy-mid); padding: 16px 24px;
+    flex-direction: column; gap: 8px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: rgba(255,255,255,.85); text-decoration: none;
+    font-size: .95rem; font-weight: 500; padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  #hero {
+    margin-top: 68px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, #2563EB 100%);
+    min-height: calc(100vh - 68px);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 60px 5%;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-inner { position: relative; max-width: 1200px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 60px; }
+  .hero-text { flex: 1; }
+  .hero-tag {
+    display: inline-block; background: rgba(96,165,250,.15); color: var(--gold);
+    font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 20px; border: 1px solid rgba(96,165,250,.3);
+    margin-bottom: 24px;
+  }
+  .hero-text h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15;
+    color: var(--white); margin-bottom: 20px;
+  }
+  .hero-text h1 em { color: var(--gold); font-style: normal; }
+  .hero-text p {
+    color: rgba(255,255,255,.72); font-size: 1.05rem; line-height: 1.7; max-width: 520px; margin-bottom: 36px;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: var(--white);
+    font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
+    padding: 14px 32px; border-radius: 10px; text-decoration: none;
+    font-size: .95rem; letter-spacing: .02em; transition: transform .2s, box-shadow .2s;
+    cursor: pointer; border: none; display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,.4); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    border: 2px solid rgba(255,255,255,.35);
+    font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600;
+    padding: 13px 28px; border-radius: 10px; text-decoration: none;
+    font-size: .95rem; transition: border-color .2s, background .2s;
+    cursor: pointer; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+  
+  .hero-card {
+    background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+    backdrop-filter: blur(12px); border-radius: 20px; padding: 40px;
+    flex-shrink: 0; width: 340px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  .hero-card h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--white); font-size: 1.1rem; margin-bottom: 20px; }
+  .va-traits { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .va-traits li {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--white); font-size: .875rem; font-weight: 500;
+  }
+  .va-traits li .icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(96,165,250,.3); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+
+  .section { padding: 80px 5%; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: .72rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800;
+    color: var(--navy); margin-bottom: 14px; line-height: 1.25;
+  }
+  .section-sub { color: var(--gray); font-size: 1rem; line-height: 1.7; max-width: 600px; margin-bottom: 48px; }
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .card {
+    background: var(--white); border: 1px solid var(--border); border-radius: 16px;
+    padding: 28px; transition: transform .25s, box-shadow .25s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(13,27,62,.1); }
+  .card-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--light); display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 16px;
+  }
+  .card h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 8px; color: var(--navy); }
+  .card p { font-size: .875rem; line-height: 1.65; color: var(--gray); }
+
+  .filipina-section { background: var(--navy); padding: 80px 5%; }
+  .filipina-inner { max-width: 1200px; margin: 0 auto; }
+  .filipina-section .section-label { color: var(--gold); }
+  .filipina-section .section-title { color: var(--white); }
+  .filipina-section .section-sub { color: rgba(255,255,255,.7); }
+  .traits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .trait-card {
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 14px; padding: 24px; transition: background .2s;
+  }
+  .trait-card:hover { background: rgba(255,255,255,.1); }
+  .trait-card .t-icon { font-size: 2rem; margin-bottom: 12px; }
+  .trait-card h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--white); font-size: .95rem; margin-bottom: 8px; }
+  .trait-card p { font-size: .83rem; color: rgba(255,255,255,.6); line-height: 1.6; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .about-visual {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    border-radius: 20px; padding: 48px 40px; position: relative; overflow: hidden;
+  }
+  .about-visual::after {
+    content: 'SIDUVA';
+    position: absolute; bottom: -10px; right: -10px;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;
+    font-size: 5rem; color: rgba(255,255,255,.05); letter-spacing: .1em;
+  }
+  .mv-block { margin-bottom: 32px; }
+  .mv-tag { font-size: .72rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .mv-block p { color: rgba(255,255,255,.8); font-size: .9rem; line-height: 1.7; }
+  .about-text .section-sub { margin-bottom: 28px; }
+  .service-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .service-chip {
+    background: var(--light); color: var(--blue);
+    font-size: .78rem; font-weight: 600; padding: 6px 14px;
+    border-radius: 20px; border: 1px solid rgba(59,130,246,.2);
+  }
+
+  .cta-section {
+    background: linear-gradient(135deg, #2563EB, #0D2B6E);
+    padding: 80px 5%; text-align: center;
+  }
+  .cta-section h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 800; color: var(--white); margin-bottom: 16px; }
+  .cta-section p { color: rgba(255,255,255,.65); font-size: 1rem; max-width: 500px; margin: 0 auto 32px; }
+  .cta-email { 
+    color: #FFFFFF; 
+    font-weight: 800; 
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .join-section { background: var(--light); padding: 80px 5%; }
+  .join-inner { max-width: 700px; margin: 0 auto; }
+  .join-card { background: var(--white); border-radius: 20px; padding: 48px; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(13,27,62,.08); }
+  .join-card h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+  .join-card .subtitle { color: var(--gray); margin-bottom: 32px; }
+  .step { display: flex; gap: 16px; margin-bottom: 24px; }
+  .step-num { width: 36px; height: 36px; background: var(--navy); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: .85rem; flex-shrink: 0; }
+  .step-body h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: .95rem; color: var(--navy); margin-bottom: 4px; }
+  .step-body p, .step-body code { font-size: .875rem; color: var(--gray); line-height: 1.6; }
+  .step-body code { background: var(--light); padding: 2px 8px; border-radius: 4px; color: var(--blue); font-family: monospace; display: block; margin-top: 6px; }
+  .email-cta { margin-top: 32px; padding: 20px; background: var(--navy); border-radius: 12px; text-align: center; }
+  .email-cta p { color: rgba(255,255,255,.7); font-size: .85rem; margin-bottom: 4px; }
+  .email-cta a { color: var(--gold); font-weight: 700; font-size: 1.1rem; text-decoration: none; }
+
+  footer {
+    background: var(--navy); color: rgba(255,255,255,.55);
+    padding: 40px 5% 24px;
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,.1); flex-wrap: wrap; }
+  .footer-brand .nav-logo { margin-bottom: 10px; display: inline-flex; }
+  .footer-brand p { font-size: .83rem; line-height: 1.65; max-width: 280px; }
+  .footer-links h5 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--white); font-size: .85rem; margin-bottom: 14px; }
+  .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-links ul li a {
+    color: rgba(255,255,255,.55); text-decoration: none; font-size: .83rem; transition: color .2s;
+    cursor: pointer;
+  }
+  .footer-links ul li a:hover { color: var(--gold); }
+  .footer-bottom { padding-top: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-bottom p { font-size: .78rem; }
+  .footer-policy { display: flex; gap: 20px; }
+  .footer-policy a { font-size: .78rem; color: rgba(255,255,255,.45); text-decoration: none; cursor: pointer; transition: color .2s; }
+  .footer-policy a:hover { color: var(--gold); }
+
+  .subpage { margin-top: 68px; }
+  .subpage-hero { background: var(--navy); padding: 60px 5%; }
+  .subpage-hero h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--white); max-width: 1200px; margin: 0 auto; }
+  .subpage-hero p { color: rgba(255,255,255,.6); max-width: 1200px; margin: 8px auto 0; }
+  .subpage-content { max-width: 900px; margin: 0 auto; padding: 60px 5%; }
+  .legal-section { margin-bottom: 40px; }
+  .legal-section h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+  .legal-section p, .legal-section li { font-size: .93rem; line-height: 1.8; color: var(--gray); }
+  .legal-section ul { padding-left: 20px; margin-top: 8px; }
+  .legal-section ul li { margin-bottom: 6px; }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--light); color: var(--navy);
+    font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600;
+    padding: 10px 20px; border-radius: 8px; border: none;
+    cursor: pointer; font-size: .875rem; margin-bottom: 32px; text-decoration: none;
+    transition: background .2s;
+  }
+  .back-btn:hover { background: var(--border); }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .hero-inner { flex-direction: column; }
+    .hero-card { width: 100%; margin-top: 40px; display: block; }
+  }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .footer-top { flex-direction: column; }
+    .about-grid { gap: 32px; }
+  }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#" onclick="navHome(); return false;">
+    SID<span>U</span>VA
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#" data-nav="home" onclick="navTo('hero'); return false;">Home</a>
+    <a href="#" data-nav="about" onclick="navTo('about'); return false;">About</a>
+    <a href="#" data-nav="services" onclick="navTo('services'); return false;">Services</a>
+    <a href="#" data-nav="join" class="btn-apply" onclick="navTo('join'); return false;">Apply Here</a>
+    <a href="#" data-nav="cta" class="btn-need" onclick="navTo('cta'); return false;">Need a VA?</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="navTo('hero'); toggleMenu(); return false;">Home</a>
+  <a href="#" onclick="navTo('about'); toggleMenu(); return false;">About</a>
+  <a href="#" onclick="navTo('services'); toggleMenu(); return false;">Services</a>
+  <a href="#" onclick="navTo('join'); toggleMenu(); return false;">Apply Here</a>
+  <a href="#" onclick="navTo('cta'); toggleMenu(); return false;">Need a VA?</a>
+</div>
+
+<div id="home" class="page active">
+
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-tag">#WorkNowWithSiduva</div>
+        <h1>Grow Your Business,<br>While We Handle the <em>Daily Tasks!</em></h1>
+        <p>In today's fast-paced business world, every minute counts. Let Siduva connect you with skilled Filipino Virtual Assistants so you can focus on what truly matters — growing your company.</p>
+        <div class="hero-btns">
+          <a class="btn-primary" href="#" onclick="navTo('join'); return false;">Apply as a VA</a>
+          <a class="btn-outline" href="#" onclick="navTo('cta'); return false;">Hire a VA</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="section-inner">
+      <div class="section-label reveal">Why Choose Siduva</div>
+      <h2 class="section-title reveal">Your Business Deserves the<br>Best Virtual Support</h2>
+      <p class="section-sub reveal">We provide skilled Virtual Assistants who are committed to helping businesses operate more efficiently — at a cost that makes sense.</p>
+      
+      <div class="va-features-container" style="display: flex; justify-content: flex-start; margin-bottom: 48px;">
+        <div class="hero-card" style="background: #ffffff; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.05); width: 100%; max-width: 700px; padding: 40px;">
+          <h3 style="color: var(--navy); margin-bottom: 20px;">What our VAs bring to your team</h3>
+          <ul class="va-traits" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <li style="color: var(--text);"><div class="icon">💼</div> Administrative Excellence</li>
+            <li style="color: var(--text);"><div class="icon">🎧</div> Customer Service Support</li>
+            <li style="color: var(--text);"><div class="icon">📅</div> Calendar & Appointment Setting</li>
+            <li style="color: var(--text);"><div class="icon">📱</div> Social Media Management</li>
+            <li style="color: var(--text);"><div class="icon">📊</div> Data Entry & Lead Generation</li>
+            <li style="color: var(--text);"><div class="icon">🤝</div> Sales & Executive Support</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card reveal">
+          <div class="card-icon">🛡️</div>
+          <h4>Dedicated & Reliable Support</h4>
+          <p>Our VAs are committed to your success, showing up consistently and delivering quality work day after day.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">💰</div>
+          <h4>Cost-Effective Solution</h4>
+          <p>Access qualified Virtual Assistants at competitive rates — reduce operational costs without sacrificing quality.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">🔄</div>
+          <h4>Flexible Support</h4>
+          <p>Part-time, full-time, or dedicated long-term — Siduva scales with your needs and grows with your business.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">🌏</div>
+          <h4>Cultural Adaptability</h4>
+          <p>Our VAs seamlessly adapt to different work cultures, communication styles, and time zones worldwide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="filipina-section">
+    <div class="filipina-inner">
+      <div class="section-label reveal">Our People</div>
+      <h2 class="section-title reveal" style="color:var(--white)">Why Siduva Partners with<br>Filipino Virtual Assistants</h2>
+      <p class="section-sub reveal" style="color:rgba(255,255,255,.6)">Most of our Virtual Assistants are from the Philippines — known worldwide for their strong skills, professionalism, and reliability.</p>
+      <div class="traits-grid">
+        <div class="trait-card reveal">
+          <div class="t-icon">💪</div>
+          <h4>Strong Work Ethic</h4>
+          <p>Filipino VAs are hardworking, dependable, and committed to delivering high-quality results consistently.</p>
+        </div>
+        <div class="trait-card reveal">
+          <div class="t-icon">⚡</div>
+          <h4>Flexible & Adaptable</h4>
+          <p>They adjust easily to different time zones, tools, systems, and client requirements — ideal for global businesses.</p>
+        </div>
+        <div class="trait-card reveal">
+          <div class="t-icon">😊</div>
+          <h4>Customer Service Excellence</h4>
+          <p>Naturally patient, friendly, and service-oriented — Filipino VAs excel in handling customer interactions.</p>
+        </div>
+        <div class="trait-card reveal">
+          <div class="t-icon">🏆</div>
+          <h4>Cost-Effective but High Quality</h4>
+          <p>Professional, skilled support at a more affordable rate — without compromising quality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-visual reveal">
+          <div class="mv-block">
+            <div class="mv-tag">Our Mission</div>
+            <p>To empower businesses worldwide by providing exceptional virtual assistance services that improve productivity, support growth, and create lasting business success.</p>
+          </div>
+          <div class="mv-block">
+            <div class="mv-tag">Our Vision</div>
+            <p>To become a trusted global partner for businesses seeking professional, reliable, and results-driven virtual assistant solutions.</p>
+          </div>
+        </div>
+        <div class="about-text">
+          <div class="section-label reveal">About Siduva</div>
+          <h2 class="section-title reveal">We Match You with the<br>Right VA for Your Business</h2>
+          <p class="section-sub reveal">At Siduva, we help businesses achieve greater efficiency and growth. We carefully recruit, screen, and match Virtual Assistants based on each client's specific needs, industry, and work requirements.</p>
+          <p class="reveal" style="color:var(--gray); font-size:.9rem; line-height:1.7;">Our team is committed to delivering dependable, high-quality service while maintaining strong communication, professionalism, and accountability. We believe that successful partnerships are built on trust, consistency, and a deep understanding of our clients' goals.</p>
+          <div class="service-list reveal">
+            <span class="service-chip">Administrative Tasks</span>
+            <span class="service-chip">Customer Support</span>
+            <span class="service-chip">Appointment Setting</span>
+            <span class="service-chip">Calendar Management</span>
+            <span class="service-chip">Executive Assistance</span>
+            <span class="service-chip">Sales Support</span>
+            <span class="service-chip">Lead Generation</span>
+            <span class="service-chip">Data Entry</span>
+            <span class="service-chip">Social Media</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="join-section" id="join">
+    <div class="join-inner">
+      <div class="join-card reveal">
+        <h2>Be Part of Our Team!</h2>
+        <p class="subtitle">Ready to work with global clients? Send us your application and let's get started.</p>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Send Your Resume</h4>
+            <p>Email your updated CV/Resume to:</p>
+            <code>siduvaou@gmail.com</code>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Use the Correct Subject Format</h4>
+            <p>Email subject must follow this format:</p>
+            <code>(Last Name, Full Name) – (Position Applying For)</code>
+            <p style="margin-top:6px; font-size:.8rem;">Example: <em>Dela Cruz, Juan Miguel – Customer Service Representative</em></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Write a Brief Introduction</h4>
+            <p>In the email body, share something about yourself that is not already in your resume. Let your personality shine!</p>
+          </div>
+        </div>
+        <div class="email-cta">
+          <p>Send your application to</p>
+          <a href="mailto:siduvaou@gmail.com">siduvaou@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="cta">
+    <h2>Ready to Grow Your Business<br>with the Right Support?</h2>
+    <p>Schedule a meeting with us and learn how our skilled Filipino Virtual Assistants can help your business succeed.</p>
+    <a href="mailto:siduvaou@gmail.com" class="btn-primary">Email Us at <span class="cta-email">siduvaou@gmail.com</span></a>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="nav-logo" href="#" onclick="navHome(); return false;">SID<span>U</span>VA</a>
+          <p>Providing highly skilled, reliable, and dedicated Filipino Virtual Assistants to help businesses grow worldwide.</p>
+        </div>
+        <div class="footer-links">
+          <h5>Navigation</h5>
+          <ul>
+            <li><a href="#" onclick="navTo('hero'); return false;">Home</a></li>
+            <li><a href="#" onclick="navTo('about'); return false;">About Us</a></li>
+            <li><a href="#" onclick="navTo('services'); return false;">Services</a></li>
+            <li><a href="#" onclick="navTo('join'); return false;">Apply Here</a></li>
+            <li><a href="#" onclick="navTo('cta'); return false;">Need a VA?</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="#" onclick="showPage('privacy'); return false;">Privacy Policy</a></li>
+            <li><a href="#" onclick="showPage('terms'); return false;">Terms & Conditions</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:siduvaou@gmail.com">siduvaou@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Siduva. All rights reserved.</p>
+        <div class="footer-policy">
+          <a href="#" onclick="showPage('privacy'); return false;">Privacy Policy</a>
+          <a href="#" onclick="showPage('terms'); return false;">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div id="privacy" class="page">
+  <div class="subpage">
+    <div class="subpage-hero">
+      <h1>Privacy Policy</h1>
+      <p>Last updated: 2025</p>
+    </div>
+    <div class="subpage-content">
+      <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+      <div class="legal-section">
+        <h2>Your Privacy Matters to Us</h2>
+        <p>At SIDUVA, we respect your privacy and are committed to protecting your personal information. Any information you provide through our website, contact forms, or job applications will be used solely to deliver our services, respond to inquiries, process applications, and improve your experience.</p>
+      </div>
+      <div class="legal-section">
+        <h2>Information We Collect</h2>
+        <p>We may collect personal information when you:</p>
+        <ul>
+          <li>Submit inquiries or contact us through our website</li>
+          <li>Apply for a Virtual Assistant position with us</li>
+          <li>Engage with our services as a business client</li>
+          <li>Browse or interact with our website</li>
+        </ul>
+        <p>This information may include your name, email address, resume or CV details, and any other information you voluntarily provide.</p>
+      </div>
+      <div class="legal-section">
+        <h2>How We Use Your Information</h2>
+        <p>The information we collect is used solely to:</p>
+        <ul>
+          <li>Deliver and improve our virtual assistant services</li>
+          <li>Respond to your inquiries and communications</li>
+          <li>Process job applications and match candidates with clients</li>
+          <li>Improve your overall experience with Siduva</li>
+        </ul>
+      </div>
+      <div class="legal-section">
+        <h2>Sharing of Information</h2>
+        <p>We do not sell or share your personal information with third parties except when required by law or when it is necessary to provide our services. Any sharing of information is done with care and only to the extent required.</p>
+      </div>
+      <div class="legal-section">
+        <h2>Cookies</h2>
+        <p>Our website may use cookies to improve functionality and analyze website traffic. Cookies are small data files placed on your device to help us understand how our site is used. By using our website, you agree to the use of cookies as described in this Privacy Policy.</p>
+      </div>
+      <div class="legal-section">
+        <h2>Your Consent</h2>
+        <p>By using our website, you agree to the collection and use of your information as described in this Privacy Policy. If you have any questions or concerns about how your data is handled, please contact us at <a href="mailto:siduvaou@gmail.com" style="color:var(--blue);">siduvaou@gmail.com</a>.</p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <p>© 2025 Siduva. All rights reserved.</p>
+        <div class="footer-policy">
+          <a href="#" onclick="showPage('privacy')">Privacy Policy</a>
+          <a href="#" onclick="showPage('terms')">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div id="terms" class="page">
+  <div class="subpage">
+    <div class="subpage-hero">
+      <h1>Terms & Conditions</h1>
+      <p>Last updated: 2025</p>
+    </div>
+    <div class="subpage-content">
+      <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+      <div class="legal-section">
+        <h2>Agreement to Terms</h2>
+        <p>By using SIDUVA's website and services, you agree to be bound by these Terms and Conditions. Please read them carefully before using our platform or engaging with our services.</p>
+      </div>
+      <div class="legal-section">
+        <h2>Your Responsibilities</h2>
+        <p>When using Siduva's website and services, you agree to:</p>
+        <ul>
+          <li>Provide accurate and truthful information when submitting inquiries or applications.</li>
+          <li>Use our website and services for lawful purposes only.</li>
+          <li>Respect the confidentiality of all shared information between parties.</li>
+          <li>Not engage in any activity that could harm, disrupt, or interfere with our services or other users.</li>
+        </ul>
+      </div>
+      <div class="legal-section">
+        <h2>Intellectual Property</h2>
+        <p>All website content — including text, graphics, logos, and design — is the property of SIDUVA and may not be copied, reproduced, or redistributed without prior written permission from Siduva.</p>
+      </div>
+      <div class="legal-section">
+        <h2>Modifications to Services</h2>
+        <p>SIDUVA reserves the right to modify or discontinue any of our services at any time, with or without notice. We also reserve the right to update these Terms and Conditions at any time. Continued use of our website or services after changes are made constitutes your acceptance of the updated terms.</p>
+      </div>
+      <div class="legal-section">
+        <h2>Limitation of Liability</h2>
+        <p>Siduva shall not be held liable for any indirect, incidental, or consequential damages arising from the use of our website or services. We make no warranties, expressed or implied, about the completeness or accuracy of the information on our site.</p>
+      </div>
+      <div class="legal-section">
+        <h2>Contact Us</h2>
+        <p>For any questions regarding these Terms and Conditions, please reach out to us at <a href="mailto:siduvaou@gmail.com" style="color:var(--blue);">siduvaou@gmail.com</a>.</p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <p>© 2025 Siduva. All rights reserved.</p>
+        <div class="footer-policy">
+          <a href="#" onclick="showPage('privacy')">Privacy Policy</a>
+          <a href="#" onclick="showPage('terms')">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const navLinks = document.getElementById('navLinks');
+    navLinks.style.display = (id === 'home') ? 'flex' : 'none';
+  }
+
+  function navTo(sectionId) {
+    if (!document.getElementById('home').classList.contains('active')) {
+      showPage('home');
+    }
+    setTimeout(() => {
+      const el = document.getElementById(sectionId);
+      if (!el) return;
+      const navH = document.querySelector('nav').offsetHeight;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - navH;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }, 60);
+    setActiveNav(sectionId);
+  }
+
+  function navHome() {
+    showPage('home');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setActiveNav('home');
+  }
+
+  function setActiveNav(sectionId) {
+    document.querySelectorAll('#navLinks a').forEach(a => a.classList.remove('nav-active'));
+    const map = { hero: 'home', home: 'home', about: 'about', services: 'services', join: 'join', cta: 'cta' };
+    const key = map[sectionId] || sectionId;
+    const el = document.querySelector(`#navLinks a[data-nav="${key}"]`);
+    if (el) el.classList.add('nav-active');
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!document.getElementById('home').classList.contains('active')) return;
+    const navH = document.querySelector('nav').offsetHeight + 10;
+    let current = 'hero';
+    const sections = ['hero','services','about','join','cta'];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= navH) current = id;
+    });
+    const map = { hero:'home', services:'services', about:'about', join:'join', cta:'cta' };
+    document.querySelectorAll('#navLinks a').forEach(a => a.classList.remove('nav-active'));
+    const activeEl = document.querySelector(`#navLinks a[data-nav="${map[current]}"]`);
+    if (activeEl) activeEl.classList.add('nav-active');
+  }, { passive: true });
+
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  setActiveNav('home');
+</script>
+</body>
+</html>
